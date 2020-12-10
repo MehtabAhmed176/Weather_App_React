@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { geoCoordinates } from '../api-fetch/geolocation'
 import { weather } from '../api-fetch/darksky'
-const Example = (props) => {
+const WeatherResult = (props) => {
 
     const [city, setCity] = useState("")
     const [weatherSummary, setWeatherSummary] = useState("")
     const [temprature, setTemprature] = useState("")
     const [buttonText, setButtonText] = useState('F');
-    const [buttonTextChange,setButtonTextChange]=useState(true)
-    const [formDisable,setFormDisable]=useState(true)
+    const [buttonTextChange, setButtonTextChange] = useState(true)
+    const [formDisable, setFormDisable] = useState(true)
     const handleSubmit = (e) => {
         e.preventDefault()
         geoCoordinates(city, (data) => {
@@ -36,13 +36,13 @@ const Example = (props) => {
     const handleChange = (e) => {
         console.log('e :', e.target.value);
         setCity(e.target.value);
-        if(city===''||e.target.value.length<=3){
+        if (city === '' || e.target.value.length <= 3) {
             setFormDisable(true)
         }
-        else{
+        else {
             setFormDisable(false)
         }
-       
+
     }
 
     const DisplayWeather = (props) => {
@@ -50,7 +50,7 @@ const Example = (props) => {
             <div>
                 <h4>Weather in {city} </h4> <br />
                 <p><i>Summary</i> --  {weatherSummary}</p>
-                <i>Temprature</i> --  {temprature*100}
+                <i>Temprature</i> --  {temprature * 100}
                 <FahrenhitetoCenti />
 
             </div>
@@ -61,11 +61,11 @@ const Example = (props) => {
             <div>
                 <button onClick={() => {
                     setButtonTextChange(!buttonTextChange)
-                    if(buttonTextChange){
+                    if (buttonTextChange) {
                         setButtonText('F')
                     }
-                    else{
-                        setButtonText('C') 
+                    else {
+                        setButtonText('C')
                     }
                 }}>
                     {buttonText}
@@ -74,9 +74,7 @@ const Example = (props) => {
         )
     }
 
-    const Centigradetemprate=()=>{
-   return 20*parseInt(temprature) * 9/5 + 32
-    }
+
     return (
         <div className="container mt-5">
             <div className="p-5">
@@ -105,4 +103,4 @@ const Example = (props) => {
     );
 }
 
-export default Example;
+export default WeatherResult;
